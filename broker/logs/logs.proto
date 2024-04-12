@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package logs;
+
+option go_package = "/logs";
+
+message Log{
+    string name = 1;
+    string Data = 2;
+}
+
+message LogRequest {
+    Log logEntry = 1;
+}
+
+message LogResponse {
+ string result= 1;
+}
+
+
+service LogService {
+    rpc WriteLog(LogRequest) returns (LogResponse);
+}
+
+
+// protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative logs.proto
+
+//protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative logs.proto 

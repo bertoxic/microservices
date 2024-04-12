@@ -1,0 +1,30 @@
+version: '3.9' # Specify the version of the Docker Compose file format
+
+services:
+  service-name-1: # Name of the first service
+    build: # Build configuration for the service
+      context: ./ # Path to the build context
+      dockerfile: Dockerfile # Path to the Dockerfile
+    ports: # Port mappings between the host and the container
+      - "8080:80" # Host port:Container port
+    environment: # Environment variables for the container
+      - VARIABLE=value
+    volumes: # Volume mappings between the host and the container
+      - ./data:/app/data
+    depends_on: # Services that this service depends on
+      - service-name-2
+
+  service-name-2: # Name of the second service
+    image: image-name:tag # Specify the Docker image to use
+    ports:
+      - "5432:5432"
+    environment:
+      - VARIABLE=value
+    volumes:
+      - ./data:/app/data
+
+volumes: # Define named volumes
+  data-volume:
+
+networks: # Define networks
+  network-name:
